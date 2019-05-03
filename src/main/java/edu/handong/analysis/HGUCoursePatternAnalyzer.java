@@ -29,7 +29,7 @@ public class HGUCoursePatternAnalyzer {
 	 * @param args
 	 */
 	public void run(String[] args) {
-		
+	
 		numOfStudents = Integer.parseInt(args[0]);
 		numOfCourses = Integer.parseInt(args[1]);
 	
@@ -54,11 +54,23 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
-		
 		// TODO: implement this method
+		students = new Student[numOfStudents];
+		Student[] ifstudent= new Student[lines.length];
+		int j=0;
 		
+		for(int i=0; i<lines.length; i++) {
+			String[] array = lines[i].split(",");
+			ifstudent[i] = new Student(array[1].trim());
+			if((studentExist(students,ifstudent[i]))) {
+				students[j] = ifstudent[i];
+				j++;
+			}
+
+		}
 		
-		return null;
+		return students;
+		
 	}
 
 	/**
@@ -68,10 +80,16 @@ public class HGUCoursePatternAnalyzer {
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
-		
-		// TODO: implement this method
-
-		return false;
+		int check =0;
+		for(Student student1: students) {
+			if (!(student1==null)){
+				if(student1.getName().equals(student.getName())) {
+					 check++;
+				}
+			}
+		}
+		if((check==0)) {return true;}
+		else return false;
 	}
 	
 	/**
@@ -83,7 +101,22 @@ public class HGUCoursePatternAnalyzer {
 		
 		// TODO: implement this method
 		
-		return null;
+		courses = new Course[numOfCourses];
+		Course[] ifcourse= new Course[lines.length];
+		int j=0;
+		
+		for(int i=0; i<lines.length; i++) {
+			String[] array = lines[i].split(",");
+			ifcourse[i] = new Course(array[2].trim());
+			if(courseExist(courses,ifcourse[i])) {
+				courses[j] = ifcourse[i];
+				j++;
+			}
+		
+		}
+		
+		return courses;
+		
 	}
 
 	/**
@@ -93,10 +126,17 @@ public class HGUCoursePatternAnalyzer {
 	 * @return boolean
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
-		
 		// TODO: implement this method
-
-		return false;
+		int check =0;
+		for(Course course1: courses) {
+			if (!(course1==null)){
+				if(course1.getCourseName().equals(course.getCourseName())) {
+					 check++;
+				}
+			}
+		}
+		if((check==0)) {return true;}
+		else return false;
+		
 	}
-
 }
